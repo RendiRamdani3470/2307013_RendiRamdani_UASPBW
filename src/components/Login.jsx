@@ -30,10 +30,10 @@ const Login = () => {
         
         <form onSubmit={handleAuth} style={formStyle}>
           <div style={inputGroup}>
-            <label style={labelStyle}>Email Mahasiswa</label>
+            <label style={labelStyle}>Alamat Email</label>
             <input
               type="email"
-              placeholder="nama@itg.ac.id"
+              placeholder="contoh@email.com" // Placeholder sudah bebas
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               style={inputStyle}
@@ -69,14 +69,12 @@ const Login = () => {
   );
 };
 
-// --- STYLES ---
 const containerStyle = {
   height: "100vh",
   width: "100vw",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  // Background menggunakan gambar perpustakaan gelap yang estetik
   backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2070&auto=format&fit=crop')`,
   backgroundSize: "cover",
   backgroundPosition: "center",
@@ -95,73 +93,14 @@ const glassCardStyle = {
   textAlign: "center",
 };
 
-const logoStyle = {
-  color: "#E50914",
-  fontSize: "2.5rem",
-  fontWeight: "900",
-  letterSpacing: "2px",
-  margin: "0 0 5px 0",
-};
-
-const subtitleStyle = {
-  color: "#ccc",
-  fontSize: "14px",
-  marginBottom: "30px",
-};
-
-const formStyle = {
-  display: "flex",
-  flexDirection: "column",
-  gap: "20px",
-};
-
-const inputGroup = {
-  textAlign: "left",
-};
-
-const labelStyle = {
-  display: "block",
-  color: "#eee",
-  fontSize: "12px",
-  marginBottom: "5px",
-  fontWeight: "bold",
-};
-
-const inputStyle = {
-  width: "100%",
-  padding: "12px 15px",
-  borderRadius: "8px",
-  border: "1px solid #333",
-  background: "#0a0a0a",
-  color: "#fff",
-  outline: "none",
-  boxSizing: "border-box",
-};
-
-const buttonStyle = {
-  padding: "14px",
-  borderRadius: "8px",
-  border: "none",
-  background: "#E50914",
-  color: "#fff",
-  fontWeight: "bold",
-  fontSize: "16px",
-  cursor: "pointer",
-  marginTop: "10px",
-  transition: "0.3s ease",
-};
-
-const footerTextStyle = {
-  color: "#888",
-  marginTop: "25px",
-  fontSize: "14px",
-};
-
-const toggleStyle = {
-  color: "#fff",
-  cursor: "pointer",
-  fontWeight: "bold",
-  textDecoration: "underline",
-};
+const logoStyle = { color: "#E50914", fontSize: "2.5rem", fontWeight: "900", letterSpacing: "2px", margin: "0 0 5px 0" };
+const subtitleStyle = { color: "#ccc", fontSize: "14px", marginBottom: "30px" };
+const formStyle = { display: "flex", flexDirection: "column", gap: "20px" };
+const inputGroup = { textAlign: "left" };
+const labelStyle = { display: "block", color: "#eee", fontSize: "12px", marginBottom: "5px", fontWeight: "bold" };
+const inputStyle = { width: "100%", padding: "12px 15px", borderRadius: "8px", border: "1px solid #333", background: "#0a0a0a", color: "#fff", outline: "none", boxSizing: "border-box" };
+const buttonStyle = { padding: "14px", borderRadius: "8px", border: "none", background: "#E50914", color: "#fff", fontWeight: "bold", fontSize: "16px", cursor: "pointer", marginTop: "10px" };
+const footerTextStyle = { color: "#888", marginTop: "25px", fontSize: "14px" };
+const toggleStyle = { color: "#fff", cursor: "pointer", fontWeight: "bold", textDecoration: "underline" };
 
 export default Login;
