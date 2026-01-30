@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth"; // Tambahkan ini untuk Login
-import { getFirestore } from "firebase/firestore"; // Tambahkan ini untuk Simpan Buku
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyArhG8ByeN-h1HVBUdFXV2E2dsMtPlfI8U",
@@ -13,5 +13,5 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app); // Ekspor untuk fitur Login
-export const db = getFirestore(app); // Ekspor untuk fitur Simpan Favorit
+export const auth = getAuth(app);
+export const db = getFirestore(app);
