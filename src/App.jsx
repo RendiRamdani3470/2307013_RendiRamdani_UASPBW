@@ -14,6 +14,7 @@ function App() {
   const [view, setView] = useState("beranda");
   const [loading, setLoading] = useState(false);
   
+  // --- NOMOR 2: INTEGRASI API EKSTERNAL (GOOGLE BOOKS API) ---
   const API_KEY = "AIzaSyD4BqG7_XBPixxiS2iIBQHOcuXknHBxAF4"; 
 
   useEffect(() => {
@@ -43,15 +44,20 @@ function App() {
     if (user && books.length === 0) fetchRecommendations();
   }, [user]);
 
+  // --- IMPLEMENTASI NOMOR 2 (A): FETCH DATA REKOMENDASI ---
   const fetchRecommendations = async () => {
     setLoading(true);
     try {
       const res = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=subject:fiction&orderBy=newest&maxResults=12&key=${API_KEY}`);
       setBooks(res.data.items || []);
-    } catch (e) { console.error(e); }
-    setLoading(false);
+    } catch (e) { 
+      console.error("API Error:", e); 
+    } finally {
+      setLoading(false);
+    }
   };
 
+  // --- IMPLEMENTASI NOMOR 2 (B): FITUR PENCARIAN BUKU ---
   const searchBooks = async () => {
     if (!searchQuery) return;
     setLoading(true);
@@ -59,8 +65,11 @@ function App() {
       const res = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${searchQuery.trim()}&maxResults=20&key=${API_KEY}`);
       setBooks(res.data.items || []);
       setView("beranda");
-    } catch (e) { alert("Gagal mencari!"); }
-    setLoading(false);
+    } catch (e) { 
+      alert("Gagal memanggil data dari API!"); 
+    } finally {
+      setLoading(false);
+    }
   };
 
   const saveToDb = async (collectionName, book) => {
@@ -100,13 +109,13 @@ function App() {
       <main style={{ flex: 1, overflowY: 'auto' }}>
         <div style={{ padding: '40px' }}>
           <div style={{ display: 'flex', gap: '10px', maxWidth: '600px', marginBottom: '40px' }}>
-            <input type="text" placeholder="Cari buku..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
+            <input type="text" placeholder="Cari buku dari Google Books..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
               style={{ flex: 1, padding: '12px 20px', borderRadius: '25px', border: '1px solid #444', background: '#141414', color: '#fff', outline: 'none' }} />
             <button onClick={searchBooks} style={{ padding: '12px 30px', background: '#E50914', color: '#fff', border: 'none', borderRadius: '25px', fontWeight: 'bold', cursor: 'pointer' }}>Cari</button>
           </div>
 
           <h3 style={{ marginBottom: '25px', fontSize: '1.5rem' }}>
-            {view === "beranda" ? "Rekomendasi" : view === "favorit" ? "Koleksi Favorit" : "Daftar Baca Nanti"}
+            {loading ? "Sedang mengambil data API..." : (view === "beranda" ? "Rekomendasi Google Books" : view === "favorit" ? "Koleksi Favorit" : "Daftar Baca Nanti")}
           </h3>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '25px' }}>
@@ -121,7 +130,6 @@ function App() {
                     <p style={{ fontSize: '14px', fontWeight: 'bold', margin: '0 0 10px 0', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{b.title}</p>
                     
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                      {/* --- TOMBOL BACA --- */}
                       <button 
                         onClick={() => window.open(linkBaca, "_blank")} 
                         style={btnAction('#2ecc71')}
