@@ -69,7 +69,6 @@ function App() {
         userId: user.uid,
         title: book.volumeInfo?.title || book.title,
         thumbnail: book.volumeInfo?.imageLinks?.thumbnail || book.thumbnail || "",
-        // Simpan link baca ke database juga
         previewLink: book.volumeInfo?.previewLink || book.previewLink || "#"
       });
       alert(`Berhasil ditambah ke ${collectionName === 'favorites' ? 'Favorit' : 'Baca Nanti'}!`);
@@ -113,7 +112,6 @@ function App() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '25px' }}>
             {(view === "beranda" ? books : view === "favorit" ? favorites : readLater).map((item) => {
               const b = item.volumeInfo || item;
-              // Ambil link baca dari API atau database
               const linkBaca = b.previewLink || "#";
 
               return (
